@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTER | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        form {
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            height: 630px;
+            border: solid .2px rgb(3, 3, 71);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        form h1 {
+            align-self: center;
+            padding: 20px;
+            font-size: 40px;
+        }
+
+        form .input-area {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        form .input-area input {
+            height: 40px;
+            width: 80%;
+            align-self: center;
+            margin: 5px;
+            outline: none;
+            text-indent: 10px;
+            border: solid .2px black;
+        }
+
+        form .input-area i {
+            position: relative;
+            top: 32px;
+            left: 420px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        form .input-area .fa-eye {
+            cursor: pointer;
+        }
+
+        form .input-area .fa-eye-slash {
+            cursor: pointer;
+        }
+
+        form .input-area label {
+            position: relative;
+            bottom: 34px;
+            left: 60px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            background-color: white;
+            pointer-events: none;
+        }
+
+        form .input-area #label_name {
+            width: 39px;
+        }
+
+        #label_email {
+            width: 42px;
+        }
+
+        #label_senha {
+            width: 42px;
+        }
+
+        #label_confirm {
+            width: 132px;
+        }
+
+        form .input-area input:focus+label,
+        form .input-area input:not(:placeholder-shown)+label {
+            bottom: 52px;
+            font-size: 13px;
+            left: 55px;
+            text-align: center;
+        }
+
+        form .input-area select {
+            width: 80%;
+            height: 40px;
+            align-self: center;
+            margin-top: 10px;
+            outline: black;
+            text-indent: 5px;
+        }
+
+        button {
+            height: 50px;
+            width: 50%;
+            align-self: center;
+            background-color: rgb(3, 3, 71);
+            cursor: pointer;
+            border: none;
+            transition: all .8s ease;
+            color: white;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: rgb(231, 231, 231);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            color: rgb(3, 3, 71);
+        }
+
+        a {
+            align-self: center;
+            margin-top: 15px;
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgba(0, 0, 0, 0.5);
+            text-decoration: underline;
+        }
+
+        #p {
+            color: rgb(170, 7, 7);
+            font-size: 12px;
+            text-indent: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <form>
+            <h1>Cadastro</h1>
+
+            <div class="input-area">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" name="username" placeholder=" " required>
+                <label for="username" id="label_name">Nome</label>
+
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email" id="label_email">E-mail</label>
+
+                <i class="fa-solid fa-eye eye_password"></i>
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password" id="label_senha">Senha</label>
+
+                <i class="fa-solid fa-eye eye_confirm"></i>
+                <input type="password" id="confirm" name="confirm" placeholder=" " required>
+                <label for="confirm" id="label_confirm">Confirme sua senha</label>
+
+                <p id="p"></p>
+
+                <select name="type" id="type">
+                    <option value="0" disabled selected>Tipo de usuário</option>
+                    <option value="1">Aluno</option>
+                    <option value="2">Professor</option>
+                </select>
+            </div>
+
+            <button type="submit">Casdastrar-me</button>
+
+            <a href="http://127.0.0.1:5000/login">Já tenho conta aqui!</a>
+        </form>
+    </main>
+
+    <script>
+        function register() {
+            document.addEventListener("DOMContentLoaded", () => {
+                const username_input = document.querySelector("#username")
+                const email_input = document.querySelector("#email")
+                const password_input = document.querySelector("#password")
+                const confirm_input = document.querySelector("#confirm")
+                const form = document.querySelector("form")
+                const select_input = document.querySelector("select")
+                const eye_password = document.querySelector(".eye_password")
+                const eye_confirm = document.querySelector(".eye_confirm")
+
+                const API_URL_BASE = "http://127.0.0.1:5000"
+
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault()
+
+                    const username = username_input.value
+                    const email = email_input.value
+                    const password = password_input.value
+                    const confirm = confirm_input.value
+                    const select = select_input.value
+                    const p = document.querySelector("#p")
+
+                    console.log(`Comparando as senhas: ${typeof (password)} | ${typeof (confirm)}`)
+
+                    if (confirm === password) {
+                        var register_data = {
+                            username: username,
+                            email: email,
+                            password: password,
+                            select: select
+                        }
+
+                        var json = JSON.stringify(register_data)
+
+                        fetch(`${API_URL_BASE}/register_user`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: json
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('[LOG] Sucesso', data)
+                            })
+                            .catch(error => {
+                                console.log('[LOG] Erro ao registrar!', error)
+                            })
+                        alert("Usuário cadastrado com sucesso")
+                        window.location.assign(`${API_URL_BASE}/login`)
+
+                    } else if (password !== confirm) {
+                        p.textContent = "Senhas diferentes!"
+                    }
+
+
+                })
+
+                eye_password.addEventListener("click", () => {
+                    eye_password.classList.toggle("fa-eye")
+                    eye_password.classList.toggle("fa-eye-slash")
+
+                    if (eye_password.classList.contains("fa-eye")) {
+                        password_input.type = "password"
+                    } else if (eye_password.classList.contains("fa-eye-slash")) {
+                        password_input.type = "text"
+                    }
+                })
+
+                eye_confirm.addEventListener("click", () => {
+                    eye_confirm.classList.toggle("fa-eye")
+                    eye_confirm.classList.toggle("fa-eye-slash")
+
+                    if (eye_confirm.classList.contains("fa-eye")) {
+                        confirm_input.type = "password"
+                    } else if (eye_confirm.classList.contains("fa-eye-slash")) {
+                        confirm_input.type = "text"
+                    }
+                })
+
+            })
+        }
+
+        register()
+    </script>
+</body>
+
+</html>

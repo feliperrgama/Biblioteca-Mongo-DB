@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVOLVER LIVRO | USER | SGB</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        main .table {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            overflow: hidden;
+            width: 90%;
+        }
+
+        th {
+            padding: 5px 20px;
+            color: rgb(3, 3, 71);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 style="padding: 20px;">Devolver livros</h1>
+        <p style="color: gray; margin-bottom: 80px; margin-left: 20px;">Faça a devolução dos livros que estão na sua
+            posse por aqui</p>
+
+        <div class="table">
+            <table border="1">
+                <thead style="background-color: rgb(195, 195, 255);">
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Ano de Publicação</th>
+                    </tr>
+                </thead>
+
+                <tbody style="text-align: center;" id="bodyFromTable">
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const API_URL_BASE = "http://127.0.0.1:5000"
+
+            const dados = {
+                email: localStorage.getItem("email")
+            }
+
+            try {
+                const response = await fetch(`${API_URL_BASE}/livro_user`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dados)
+                })
+                const data = await response.json()
+            } catch (err) {
+                console.log(`Erro de conexão com o servidor: ${err}`)
+                alert("Erro de conexão com o servidor")
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+use("Biblioteca")
+
+db.createCollection("Livros")
+db.createCollection("Adm")
+db.createCollection("Users")

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVROS | USER | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h1 {
+            font-size: 40px;
+            padding: 20px;
+        }
+
+        main .table {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            overflow: hidden;
+            width: 90%;
+        }
+
+        th {
+            padding: 5px 20px;
+            color: rgb(3, 3, 71);
+        }
+
+        .filter {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .filter input {
+            height: 35px;
+            width: 300px;
+            text-indent: 10px;
+            outline: none;
+            border: .2px solid rgb(3, 3, 71);
+        }
+
+        .filter button {
+            padding: 8.5px 25px;
+            cursor: pointer;
+            background-color: rgb(3, 3, 71);
+            color: white;
+            border: none;
+            transition: 0.8s ease;
+        }
+
+        .filter button:hover {
+            transform: scale(1.1);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .filter button:active {
+            transform: scale(.85);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Livros</h1>
+
+        <p style="color: gray; padding: 0px 20px; margin-bottom: 50px;">Veja todos os livros que estão na biblioteca</p>
+
+        <div class="filter">
+            <input type="text" id="title" placeholder="Título do livro">
+            <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="table">
+            <table border="1">
+                <thead style="background-color: rgb(195, 195, 255);">
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Ano de Publicação</th>
+                    </tr>
+                </thead>
+
+                <tbody style="text-align: center;" id="bodyFromTable">
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const API_URL_BASE = "http://127.0.0.1:5000"
+
+            try {
+                const response = await fetch(`${API_URL_BASE}/table_livros`)
+                const data = await response.json()
+
+                if (!response.ok) {
+                    console.log(`Erro ao buscar livros: ${data.message}`)
+                    return
+                }
+
+                const tbody = document.querySelector("#bodyFromTable")
+
+                data.forEach(livro => {
+                    const row = document.createElement('tr')
+                    if (livro._status == '1') {
+                        livro._status = 'Disponível'
+                    } else {
+                        livro._status = 'Indisponível'
+                    }
+
+                    row.innerHTML = `
+                        <td class="td">${livro.id_book}</td>
+                        <td class="td">${livro._status}</td>
+                        <td class="td">${livro.title}</td>
+                        <td class="td">${livro.autor}</td>
+                        <td class="td">${livro.publish_age}</td>
+                    `
+                    tbody.appendChild(row)
+                    row.classList.add("tr")
+                });
+            } catch (err) {
+                console.log(`Error: ${err}`)
+                alert('Erro ao conectar com o servidor')
+            }
+
+            const btn = document.querySelector(".btn")
+
+            btn.addEventListener("click", async () => {
+                const title = document.getElementById("title")
+
+                try {
+                    const filter_data = {
+                        title: title.value
+                    }
+
+                    const response = await fetch(`${API_URL_BASE}/filter_table_livros`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(filter_data)
+                    })
+
+                    const data = await response.json()
+
+                    if (response.ok) {
+                        const tbody = document.querySelector("#bodyFromTable")
+                        tbody.innerHTML = ""
+
+                        data.forEach(livro => {
+                            const row = document.createElement('tr')
+                            if (livro._status == '1') {
+                                livro._status = 'Disponível'
+                            } else {
+                                livro._status = 'Indisponível'
+                            }
+
+                            row.innerHTML = `
+                                <td class="td">${livro.id_book}</td>
+                                <td class="td">${livro._status}</td>
+                                <td class="td">${livro.title}</td>
+                                <td class="td">${livro.autor}</td>
+                                <td class="td">${livro.publish_age}</td>
+                            `
+                            tbody.appendChild(row)
+                            row.classList.add("tr")
+                        });
+
+                        console.log(`O que aconteceu: ${data.message}`)
+                    }
+                } catch (err) {
+                    console.log(`Error: ${err}`)
+                    alert("Erro ao conectar com o servidor")
+                }
+
+                if (title.value == "") {
+
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
