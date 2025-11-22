@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMOVER LIVROS | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <style>
+        * { padding: 0; margin: 0; box-sizing: border-box; font-family: "Open sans", sans-serif; }
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { display: flex; flex-direction: column; align-items: center; }
+
+        
+        .sec-1 { margin-top: 40px; margin-bottom: 30px; width: 90%; }
+        .sec-1 h1 { margin-bottom: 15px; color: rgb(3, 3, 71); }
+        .sec-1 p { color: rgb(113, 113, 130); }
+        .sec-1 a { text-decoration: none; color: rgb(74, 74, 255); font-weight: bold; margin-bottom: 10px; display: inline-block; }
+
+        .table-container { width: 90%; margin-bottom: 50px; overflow-x: auto; }
+
+        /* Barra de Ferramentas (Botão de Remover) */
+        .toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .btn-delete-all {
+            background-color: rgb(180, 40, 40);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-delete-all:hover { background-color: rgb(120, 20, 20); }
+
+        /* Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead { background-color: rgb(3, 3, 71); color: white; }
+        
+        th, td { 
+            padding: 15px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd; 
+        }
+        
+        /* Coluna do Checkbox */
+        th.check-col, td.check-col { 
+            width: 50px; 
+            text-align: center; 
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.3); 
+            cursor: pointer;
+            accent-color: rgb(3, 3, 71);
+        }
+
+        tbody tr:hover { background-color: rgb(241, 241, 212); }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="sec-1">
+            <a href="/home_page_adm"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+            <h1>Remover Livros</h1>
+            <p>Selecione os livros que deseja remover do acervo.</p>
+        </section>
+
+        <section class="table-container">
+            
+            <form action="/deletar_livros_selecionados" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir os itens selecionados?');">
+                
+                <div class="toolbar">
+                    <button type="submit" class="btn-delete-all">
+                        <i class="fa-solid fa-trash-can"></i> REMOVER SELECIONADOS
+                    </button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- Checkbox principal para marcar tudo -->
+                            <th class="check-col">
+                                <input type="checkbox" id="selectAll" onclick="toggle(this)">
+                            </th>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Ano</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 
+                          O PROGRAMADOR PYTHON DEVE INSERIR O LOOP AQUI:
+                          {% for livro in livros %}
+                        -->
+                        <tr>
+                            <!-- Checkbox individual de cada livro -->
+                            <td class="check-col">
+                                <!-- O 'value' deve ser o ID do livro vindo do banco -->
+                                <input type="checkbox" name="livros_ids" value="1"> 
+                            </td>
+                            <td>1</td>
+                            <td>Exemplo: Dom Casmurro</td> 
+                            <td>Machado de Assis</td>     
+                            <td>1899</td>                 
+                            <td>Disponível</td>           
+                        </tr>
+                         
+                    </tbody>
+                </table>
+            </form>
+        </section>
+    </main>
+
+    <!-- selecionar todos os checkboxes -->
+    <script>
+        function toggle(source) {
+            checkboxes = document.getElementsByName('livros_ids');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+</body>
+</html>

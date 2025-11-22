@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESPONDER SOLICITAÇÕES | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <style>
+        * { padding: 0; margin: 0; box-sizing: border-box; font-family: "Open sans", sans-serif; }
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { display: flex; flex-direction: column; align-items: center; }
+
+    
+        .sec-1 { margin-top: 40px; margin-bottom: 30px; width: 90%; }
+        .sec-1 h1 { margin-bottom: 15px; color: rgb(3, 3, 71); }
+        .sec-1 p { color: rgb(113, 113, 130); }
+        .sec-1 a { text-decoration: none; color: rgb(74, 74, 255); font-weight: bold; margin-bottom: 10px; display: inline-block; }
+
+        .table-container { width: 90%; margin-bottom: 50px; overflow-x: auto; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead { background-color: rgb(3, 3, 71); color: white; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        
+        
+        tbody tr:hover { background-color: rgb(241, 241, 212); }
+
+        
+        .actions-cell {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-accept { background-color: rgb(40, 160, 80); } /* Verde */
+        .btn-accept:hover { background-color: rgb(30, 120, 60); }
+
+        .btn-reject { background-color: rgb(180, 40, 40); } /* Vermelho */
+        .btn-reject:hover { background-color: rgb(120, 20, 20); }
+
+    </style>
+</head>
+<body>
+    <main>
+        <section class="sec-1">
+            <a href="/home_page_adm"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+            <h1>Solicitações Pendentes</h1>
+            <p>Gerencie os pedidos de empréstimo aguardando aprovação.</p>
+        </section>
+
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Livro Solicitado</th>
+                        <th>Data do Pedido</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 
+                        AQUI ENTRA O LOOP JINJA2 DO PYTHON 
+                        Para cada solicitação, cria uma linha com botões individuais
+                    -->
+                    <!-- Exemplo visual -->
+                    <tr>
+                        <td>10</td>
+                        <td>Maria Silva</td>
+                        <td>Harry Potter e a Pedra Filosofal</td>
+                        <td>22/11/2025</td>
+                        <td class="actions-cell">
+                            
+                            <!-- Botão Aceitar -->
+                            <!-- Substituir o action pelo link correto do Flask ex: /aceitar/{{solicitacao.id}} -->
+                            <form action="/aceitar_solicitacao" method="POST">
+                                <input type="hidden" name="id_solicitacao" value="10">
+                                <button type="submit" class="btn-action btn-accept">
+                                    <i class="fa-solid fa-check"></i> Aceitar
+                                </button>
+                            </form>
+
+                            <!-- Botão Recusar -->
+                            <form action="/recusar_solicitacao" method="POST">
+                                <input type="hidden" name="id_solicitacao" value="10">
+                                <button type="submit" class="btn-action btn-reject">
+                                    <i class="fa-solid fa-xmark"></i> Recusar
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

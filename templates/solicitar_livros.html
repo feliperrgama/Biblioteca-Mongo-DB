@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Solicitações</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-green-800 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold"><i class="fas fa-tasks mr-2"></i>Solicitações</h1>
+            <div><a href="/home_adm" class="hover:text-green-200">Voltar</a></div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-10 p-5">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-gray-50 p-4 border-b border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800">Solicitações Pendentes</h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Usuário</th>
+                            <th class="py-3 px-6 text-left">Livro</th>
+                            <th class="py-3 px-6 text-center">Data</th>
+                            <th class="py-3 px-6 text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <!-- O Backend vai preencher este TBODY -->
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <!-- 
+                             AQUI ENTRA O CÓDIGO JINJA2 DO BACKEND PARA LISTAR AS SOLICITAÇÕES 
+                             COM BOTÕES PARA ACEITAR OU RECUSAR
+                        -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
