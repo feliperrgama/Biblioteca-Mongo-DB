@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGB WELCOME</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 500px;
+            /* background-color: aqua; */
+        }
+
+        main h1 {
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        div {
+            /* background-color: blue; */
+            height: 100px;
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+            width: 400px;
+            justify-content: space-between;
+        }
+
+        button {
+            height: 60px;
+            width: 180px;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            background-image: linear-gradient(to right, rgb(3, 3, 71) 0%, rgb(3, 3, 71) 50%, rgb(231, 231, 231) 50%, rgb(231, 231, 231) 100%);
+            background-size: 220% 100%;
+            background-position: 0% 0%;
+            ;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.7s ease;
+            color: white;
+        }
+
+        .register-btn {
+            background-image: linear-gradient(to left, rgb(231, 231, 231) 0%, rgb(231, 231, 231) 50%, rgb(3, 3, 71) 50%, rgb(3, 3, 71) 100%);
+            background-size: 220%, 100%;
+            background-position: 0% 0%;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            transition: all 0.7s ease;
+        }
+
+        .login-btn:hover {
+            background-position: -90% 0%;
+            color: rgb(3, 3, 71);
+
+        }
+
+        .register-btn:hover {
+            background-position: 100% 0%;
+            color: rgb(3, 3, 71);
+        }
+
+
+        .choose_box {
+            background-color: rgba(0, 0, 0, 0.3);
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.1s ease;
+        }
+
+        .activate {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .choose {
+            background-color: white;
+            border: 10px;
+            height: 300px;
+            width: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .btn-to-back {
+            align-self: flex-start;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+            margin-top: 15px;
+            margin-left: 20px;
+            border: none;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .btn-to-back i {
+            font-size: 19px;
+        }
+
+        .btn-to-back:hover {
+            background-color: rgb(231, 231, 231);
+        }
+
+        .choose label {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        .option {
+            background-color: rgb(3, 3, 71);
+            color: white;
+            transition: all 0.6s ease;
+            margin-bottom: 80px;
+        }
+
+        .option:hover {
+            transform: scale(1.1);
+        }
+
+        .option:active {
+            transform: scale(.90);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Bem vindo ao SGB</h1>
+        <p><em>Faça um excelente gerenciamento de biblioteca atravéz de uma interface simples</em></p>
+
+        <div>
+            <button class="login-btn">Login</button>
+            <button class="register-btn">Casdastro</button>
+        </div>
+
+        <div class="choose_box">
+            <div class="choose">
+                <button class="btn-to-back"><i class="fa-solid fa-arrow-left"
+                        style="color: rgb(3, 3, 71);"></i></button>
+
+                <label>Que usuário é você?</label>
+
+                <div class="button-box">
+                    <button class="option" id="userOption">Professor/Aluno</button>
+                    <button class="option" id="admOption">Administrador</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let login_btn = document.querySelector(".login-btn")
+            let register_btn = document.querySelector(".register-btn")
+            const API_URL_BASE = 'http://127.0.0.1:5000'
+
+            const choose_box = document.querySelector(".choose_box")
+            const choose = document.querySelector(".choose")
+
+            login_btn.addEventListener('click', () => {
+                choose_box.classList.add("activate")
+                // window.location.assign(`${API_URL_BASE}/choose_login`)
+            })
+
+            register_btn.addEventListener('click', () => {
+                window.location.assign(`${API_URL_BASE}/register`)
+            })
+
+            const btnToBack = document.querySelector(".btn-to-back")
+
+            btnToBack.addEventListener('click', () => {
+                choose_box.classList.remove("activate")
+            })
+
+            const admOption = document.querySelector("#admOption")
+            const userOption = document.querySelector("#userOption")
+
+            admOption.addEventListener('click', () => {
+                window.location.assign(`${API_URL_BASE}/login_adm`)
+            })
+
+            userOption.addEventListener('click', () => {
+                window.location.assign(`${API_URL_BASE}/login`)
+            })
+        }) 
+    </script>
+</body>
+
+</html>

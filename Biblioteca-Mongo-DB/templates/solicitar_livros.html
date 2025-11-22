@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLICITAR LIVROS | USER | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        main .sec-1 {
+            padding: 30px;
+        }
+
+        main .sec-2 {
+            margin-top: 50px;
+        }
+
+        main .sec-2 h4 {
+            padding: 30px;
+        }
+
+        main .sec-2 .table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            font-family: 'Times New Roman', Times, serif;
+            border-collapse: collapse;
+            overflow: hidden;
+            width: 90%;
+        }
+
+        th {
+            padding: 5px 20px;
+            color: rgb(3, 3, 71);
+        }
+
+        .sec-3 {
+            display: flex;
+            margin-top: 120px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 150px;
+            gap: 20px;
+        }
+
+        .sec-3 button {
+            height: 60px;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .sec-3 .btn-2 {
+            background-image: linear-gradient(to left, rgb(3, 3, 71) 0%, rgb(3, 3, 71) 50%, rgb(231, 231, 231) 50%, rgb(231, 231, 231) 100%);
+            background-size: 220% 100%;
+            background-position: 100% 0;
+            overflow: hidden;
+            position: relative;
+            border: none;
+            transition: all .6s ease;
+            color: white;
+        }
+
+        .sec-3 .btn-2:hover {
+            background-position: -0% 0%;
+            color: rgb(3, 3, 71);
+        }
+
+        .sec-3 .btn-1 {
+            background-image: linear-gradient(to left, rgb(3, 3, 71) 0%, rgb(3, 3, 71) 50%, rgb(231, 231, 231) 50%, rgb(231, 231, 231) 100%);
+            border: none;
+            color: white;
+            background-size: 220% 100%;
+            background-position: 100% 0%;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.8s ease;
+        }
+
+        .sec-3 .btn-1:hover {
+            background-position: 0% 0%;
+            color: rgb(3, 3, 71);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <section class="sec-1">
+            <h1 style="font-size: 40px;">Solicitar Livros</h1>
+            <p style="color: gray; margin-top: 15px;">Solicite empréstimos de livros disponíveis na Biblioteca</p>
+        </section>
+
+        <section class="sec-2">
+            <h4>Livros Disponíveis</h4>
+
+            <div class="table">
+                <table border="1">
+                    <thead style="background-color: rgb(195, 195, 255);">
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Ano de Publicação</th>
+                            <th>Solicitar</th>
+                        </tr>
+                    </thead>
+
+                    <tbody style="text-align: center;" id="bodyFromTable">
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="sec-3">
+            <button class="btn-1">Selecionar todos os livros</button>
+            <button class="btn-2">Realizar solicitação</button>
+        </section>
+
+    </main>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const sec2 = document.querySelector(".sec-2")
+            const API_URL_BASE = "http://127.0.0.1:5000"
+
+            try {
+                const response = await fetch(`${API_URL_BASE}/table_livros`)
+                const data = await response.json()
+
+                if (!response.ok) {
+                    console.log(`Erro ao buscar livros: ${data.message}`)
+                    return
+                }
+
+                const tbody = document.querySelector("#bodyFromTable")
+
+                data.forEach(livro => {
+                    const row = document.createElement('tr')
+                    if (livro._status == '1') {
+                        livro._status = 'Disponível'
+                        row.innerHTML = `
+                        <td class="td">${livro.id_book}</td>
+                        <td class="td">${livro._status}</td>
+                        <td class="td">${livro.title}</td>
+                        <td class="td">${livro.autor}</td>
+                        <td class="td">${livro.publish_age}</td>
+                        <td><input class="checks" style="accent-color: rgb(3, 3, 71)" type="checkbox"></td>
+                    `
+                        tbody.appendChild(row)
+                        row.classList.add("tr")
+                    } else {
+                        livro._status = 'Indisponível'
+                    }
+
+                });
+            } catch (err) {
+                console.log(`Error: ${err}`)
+                alert('Erro ao conectar com o servidor')
+            }
+
+            const solicitar_btn = document.querySelector(".btn-2")
+            const select = document.querySelector(".btn-1")
+
+            solicitar_btn.addEventListener("click", async () => {
+                const checks = document.querySelectorAll(".checks")
+                const arrayChecks = Array.from(checks)
+                const trs = document.querySelectorAll(".tr")
+                const arrayTr = Array.from(trs)
+
+                console.log(arrayTr.length, arrayChecks.length)
+
+                for (let i = 0; i < arrayChecks.length; i++) {
+                    if (arrayChecks[i].checked) {
+                        const tds = arrayTr[i].querySelectorAll(".td")
+                        const arrayTd = Array.from(tds)
+                        const livro_data = {
+                            id_book: arrayTd[0].textContent,
+                            email: localStorage.getItem("email")
+                        }
+                        try {
+                            const resposta = await fetch(`${API_URL_BASE}/solicitar`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(livro_data)
+                            })
+                            const data = await resposta.json()
+                            if (resposta.ok) {
+                                console.log("[LOG] Livro solicitado com sucesso")
+                                console.log(`[Message] ${data.message}`)
+                                console.log(`User: ${data.user}`)
+                            } else {
+                                console.log("[ERRO] Livro não solicitado")
+                                console.log(`[Message] ${data.message}`)
+                            }
+                        } catch (err) {
+                            console.log(`[ERRO] Erro ao conectar com o servidor: ${err}`)
+                            alert("Erro ao conectar com o servidor")
+                        }
+                    }
+                }
+
+            })
+
+            select.addEventListener("click", () => {
+                const checks = document.querySelectorAll(".checks")
+                const arrayChecks = Array.from(checks)
+
+                if (select.innerHTML == 'Selecionar todos os livros') {
+                    select.innerHTML = 'Desmarcar todos os livros'
+                    arrayChecks.forEach(check => {
+                        check.checked = true
+                    })
+                } else {
+                    select.innerHTML = 'Selecionar todos os livros'
+                    arrayChecks.forEach(check => {
+                        check.checked = false
+                    })
+                }
+
+            })
+
+        })
+    </script>
+</body>
+
+</html>

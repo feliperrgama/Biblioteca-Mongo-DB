@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER HOME PAGE | SGB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Open sans", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .icon-function {
+            background-color: rgb(174, 208, 252);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main .sec-1 {
+            margin-top: 40px;
+            margin-bottom: 60px;
+            margin-left: 40px;
+        }
+
+        main .sec-1 h1 {
+            margin-bottom: 15px;
+        }
+
+        main .sec-1 p {
+            color: rgb(113, 113, 130);
+        }
+
+        main .sec-2 {
+            display: flex;
+            gap: 15px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-left: -50px;
+        }
+
+        main .sec-2 .function-container {
+            height: 250px;
+            width: 450px;
+            background-color: rgb(241, 241, 212);
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s ease;
+        }
+
+        main .sec-2 .function-container:hover {
+            transform: scale(1.1);
+            background-color: rgb(3, 3, 71);
+            color: white;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        main .sec-2 .function-container .function {
+            padding: 25px;
+            transition: all 0.5s ease;
+        }
+
+        main .sec-2 .function-container .function .function-name {
+            margin-top: 30px;
+        }
+
+        main .sec-2 .function-container .function .function-name .h4 {
+            margin-bottom: 10px;
+        }
+
+        main .sec-2 .function-container .btn-cont {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main .sec-2 .function-container .acessar-btn {
+            width: 90%;
+            align-self: center;
+            background-color: rgb(3, 3, 71);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            height: 32px;
+            cursor: pointer;
+            transition: all 0.6s ease;
+        }
+
+        main .sec-3 {
+            margin-top: 80px;
+            margin-bottom: 50px;
+            border: solid .8px rgb(3, 3, 71);
+            padding: 30px;
+            width: 90%;
+            align-self: center;
+            background-color: rgb(214, 232, 255);
+        }
+
+        main .sec-3 h4 {
+            padding: 20px 0px;
+            color: rgb(0, 0, 65);
+        }
+
+        main .sec-3 ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-left: 20px;
+        }
+
+        main .sec-3 ul li {
+            color: rgb(0, 0, 65);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="sec-1">
+            <h1>Bem vindo, {{ nome_do_usuario }}</h1>
+            <p>Gerencie seus empréstimos de livros na Biblioteca</p>
+        </section>
+
+        <section class="sec-2">
+            <div class="function-container">
+                <div class="function">
+                    <div class="icon-function">
+                        <i style="color: rgb(74, 74, 255); font-size: 20px;" class="fa-solid fa-book"></i>
+                    </div>
+
+                    <div class="function-name">
+                        <h4 class="h4">Solicitar Livros</h4>
+                        <p class="p-function">Faça a solicitação de um ou mais livros no sistema</p>
+                    </div>
+                </div>
+
+                <div class="btn-cont">
+                    <button class="acessar-btn">Acessar</button>
+                </div>
+            </div>
+
+            <div class="function-container">
+                <div class="function">
+                    <div class="icon-function">
+                        <i style="color: rgb(74, 74, 255);" class="fa-solid fa-list-ul"></i>
+                    </div>
+
+                    <div class="function-name">
+                        <h4 class="h4">Livros Disponíveis</h4>
+                        <p>Consulte todos os livros atualmente disponíveis</p>
+                    </div>
+                </div>
+
+                <div class="btn-cont">
+                    <button class="acessar-btn">Acessar</button>
+                </div>
+            </div>
+
+            <div class="function-container">
+                <div class="function">
+                    <div class="icon-function">
+                        <i style="color: rgb(74, 74, 255);" class="fa-solid fa-arrow-up"></i>
+                    </div>
+
+                    <div class="function-name">
+                        <h4 class="h4">Devolver Livro</h4>
+                        <p>Registre a devolução de livros que estão com você</p>
+                    </div>
+                </div>
+
+                <div class="btn-cont">
+                    <button class="acessar-btn">Acessar</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="sec-3">
+            <div>
+                <h4>Informações sobre o empréstimo</h4>
+
+                <div>
+                    <ul>
+                        <li>Você pode solicitar até 3 livros simultaneamente</li>
+                        <li>O prazo de empréstimo é de 14 dias</li>
+                        <li>Renove seus empréstimos antes do vencimento para evitar multas</li>
+                        <li>Consulte a disponibilidade antes de solicitar um livro</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const API_URL_BASE = "http://127.0.0.1:5000"
+            const btn = Array.from(document.querySelectorAll(".acessar-btn"))
+            const div = Array.from(document.querySelectorAll(".function-container"))
+
+
+
+            div[0].addEventListener("mouseover", () => {
+                btn[0].style.backgroundColor = 'white'
+                btn[0].style.color = 'rgb(3, 3, 71)'
+            })
+
+            div[0].addEventListener("mouseout", () => {
+                btn[0].style.backgroundColor = 'rgb(3, 3, 71)'
+                btn[0].style.color = 'white'
+            })
+
+            div[0].addEventListener("click", () => {
+                window.location.assign(`${API_URL_BASE}/solicitar_livros_user`)
+            })
+
+
+
+
+            div[1].addEventListener("mouseover", () => {
+                btn[1].style.backgroundColor = 'white'
+                btn[1].style.color = 'rgb(3, 3, 71)'
+            })
+
+            div[1].addEventListener("mouseout", () => {
+                btn[1].style.backgroundColor = 'rgb(3, 3, 71)'
+                btn[1].style.color = 'white'
+            })
+
+            div[1].addEventListener("click", () => {
+                window.location.assign(`${API_URL_BASE}/livros_disponiveis`)
+            })
+
+
+
+
+            div[2].addEventListener("mouseover", () => {
+                btn[2].style.backgroundColor = 'white'
+                btn[2].style.color = 'rgb(3, 3, 71)'
+            })
+
+            div[2].addEventListener("mouseout", () => {
+                btn[2].style.backgroundColor = 'rgb(3, 3, 71)'
+                btn[2].style.color = 'white'
+            })
+
+            div[2].addEventListener("click", () => {
+                window.location.assign(`${API_URL_BASE}/devolver_livro`)
+            })
+
+
+        })
+    </script>
+</body>
+
+</html>
