@@ -3,7 +3,10 @@ from mysql.connector import connect, Error
 
 app = Flask(__name__) # Recomendação da documentação
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8a2ae489ffcb5bccbe5a975c1af3b5c6df6529e7
 # 1 - Criar a 1ª página do site
 # toda página tem um route e uma função
 # route -> O caminho que vem depois do meu domínio ex: youtube.com/route, route = usuarios. Qual link vai abrir qual página
@@ -305,6 +308,7 @@ def devolver():
 def error(nome):
     return f'Página ({nome}) não encontrada!'
 
+<<<<<<< HEAD
 #===== NOVAS ROTAS PARA AS PÁGINAS PRINCIPAIS=====
 
 @app.route('/admin')
@@ -315,6 +319,8 @@ def admin_page():
 @app.route('/dashboard')
 def user_dashboard():
     return render_template("/home_page_user.html")
+=======
+>>>>>>> 8a2ae489ffcb5bccbe5a975c1af3b5c6df6529e7
 
 
 # Colocar site no ar

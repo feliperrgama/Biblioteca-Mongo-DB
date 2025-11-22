@@ -34,6 +34,11 @@ def registerPage():
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8a2ae489ffcb5bccbe5a975c1af3b5c6df6529e7
 # ROTA QUE DIRECIONA PARA A TELA DE LOGIN DO ADM
 @app.route('/login_adm')
 def loginAdmPage():
